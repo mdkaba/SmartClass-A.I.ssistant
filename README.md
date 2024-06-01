@@ -1,18 +1,30 @@
 # SmartClass-A.I.ssistant
 
-### Objectives
+## Objectives
 
 The primary objective of the SmartClass A.I.ssistant project is to develop a Convolutional Neural Network (CNN) using PyTorch to analyze and classify student images into four distinct states: Neutral, Engaged/Focused, Angry/Irritated, and Happy , the fourth state we have chosen. This involves collecting, cleaning, and labeling suitable datasets, building and training the CNN model, evaluating its performance using various metrics, and conducting bias analysis to ensure ethical AI application. The project aims to provide real-time feedback during lectures by recognizing students' facial expressions, enhancing the learning experience dynamically.
 
 ### Group Information
 
 
-
-  * <strong> Kaloyan Kirilov (github.com/kalo2711) </strong>: Data Specialist <br> As the Data Specialist, my primary responsibility is managing the dataset lifecycle, which includes sourcing, pre-processing, and loading data. I will ensure data quality and integrity, while also collaborating with the team to enhance our understanding and troubleshooting of data-related issues.
-  * <strong> Mamadou Kaba (github.com/mdkaba) </strong>: Training Specialist <br> As the Training Specialist, I will be the main person crafting, tuning, and training the Convolutional Neural Network. While I will be involved in all stages of model development, my primary focus will be on setting hyperparameters, monitoring training progress, and troubleshooting convergence issues.
-  * <strong> Jaskirat Kaur (github.com/jaskiratkaur1906) </strong>: Evaluation Specialist <br> As the Evaluation Specialist, my main task will be to rigorously test and evaluate our model's performance. I will analyze predictions, identify strengths and weaknesses, and detect any biases. My work will guide the refinement of the model and ensure it performs accurately and fairly across all metrics.
+* <strong> Mamadou Kaba (github.com/mdkaba) </strong>: Training Specialist <br> As the Training Specialist, I will be the main person crafting, tuning, and training the Convolutional Neural Network. While I will be involved in all stages of model development, my primary focus will be on setting hyperparameters, monitoring training progress, and troubleshooting convergence issues.
+ * <strong> Jaskirat Kaur (github.com/jaskiratkaur1906) </strong>: Evaluation Specialist <br> As the Evaluation Specialist, my main task will be to rigorously test and evaluate our model's performance. I will analyze predictions, identify strengths and weaknesses, and detect any biases. My work will guide the refinement of the model and ensure it performs accurately and fairly across all metrics.
+ * <strong> Kaloyan Kirilov (github.com/kalo2711) </strong>: Data Specialist <br> As the Data Specialist, my primary responsibility is managing the dataset lifecycle, which includes sourcing, pre-processing, and loading data. I will ensure data quality and integrity, while also collaborating with the team to enhance our understanding and troubleshooting of data-related issues.
+ 
     
-### Installation
+## Contents and Purpose of Each File
+
+### Data_Cleaning Folder:
+
+ * normalize.py: This script normalizes pixel intensity values of images, ensuring consistent intensity distribution across all images.
+ * resize.py: This script resizes images to 96x96 pixels, standardizing the image dimensions.
+ * visualize_dataset.py: This script visualizes the class distribution and sample images, providing insights into the dataset characteristics
+
+### Dataset Folder:
+
+Contains the cleaned and standardized dataset, organized into folders for each class (Angry, Neutral, Focused, Happy), with 500 images per class.
+
+## Execution Steps
 1. Clone the Repository: ```git clone git@github.com:your_username/SmartClass-A.I.ssistant.git``` <br>
 <strong>** Note </strong>: Replace ```your_username``` with your actual GitHub username.
 
@@ -20,3 +32,11 @@ The primary objective of the SmartClass A.I.ssistant project is to develop a Con
 * Make sure you have Python installed on your system.
 * Navigate to the project directory: ```cd SmartClass-A.I.ssistant```
 * Install dependencies: ```pip install -r requirements.txt```
+
+3. Normalize Images: ```python Data_Cleaning/normalize.py``` <br> This will normalize the pixel intensity values inside the folder of class.
+
+4. Resize Images: ```python Data_Cleaning/resize.py``` <br> This will resize all images in folder to 96x96 pixels, ensuring uniform dimensions.
+5. Visualize Dataset: ```python Data_Cleaning/visualize_dataset.py``` <br> This script will generate visualizations for class distribution and sample images with corresponding pixel intensity histograms. The visualizations help in understanding the dataset characteristics and ensuring that the data cleaning process was successful.
+
+
+
