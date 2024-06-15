@@ -1,15 +1,15 @@
-'''
+"""
 Sources used:
 https://towardsdatascience.com/finding-duplicate-images-with-python-71c04ec8051
-'''
+"""
 import os
 from PIL import Image
 import imagehash
 from collections import defaultdict
 import shutil
 
-def find_and_handle_duplicates(image_folder, duplicates_folder):
 
+def find_and_handle_duplicates(image_folder, duplicates_folder):
     if not os.path.exists(duplicates_folder):
         os.makedirs(duplicates_folder)
 

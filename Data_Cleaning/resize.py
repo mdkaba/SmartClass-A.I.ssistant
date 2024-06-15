@@ -1,14 +1,14 @@
-'''
+"""
 Source used:
 https://learnopencv.com/image-resizing-with-opencv/
-'''
+"""
 
 import cv2 as cv
 import os
 
+
 # Function to resize images
 def resize_images(input_folder, output_folder, size=(96, 96)):
-
     if not os.path.exists(output_folder):
         os.makedirs(output_folder)
 
@@ -30,8 +30,9 @@ def resize_images(input_folder, output_folder, size=(96, 96)):
             else:
                 print(f"Failed to read {file}")
 
-input_folder = "C:\\PATH\\TO\\REPO\\SmartClass-A.I.ssistant\\Dataset\\Team\\Team_Normalize"
-output_folder = 'C:\\PATH\\TO\\REPO\\SmartClass-A.I.ssistant\\Dataset\\Team\\Team_Cleaned'
+
+input_folder = ".\\Dataset\\Team\\Team_Normalize"
+output_folder = '.\\Dataset\\Team\\Team_Cleaned'
 
 # Call the function to resize images
 resize_images(input_folder, output_folder, size=(96, 96))

@@ -1,9 +1,9 @@
-'''
+"""
 sources used:
 https://www.geeksforgeeks.org/bar-plot-in-matplotlib/
 https://www.geeksforgeeks.org/plotting-histogram-in-python-using-matplotlib/
 https://www.geeksforgeeks.org/numpy-concatenate-function-python/
-'''
+"""
 
 import os
 import cv2 as cv
@@ -12,15 +12,16 @@ import matplotlib.pyplot as plt
 import random
 
 # Define the path to your dataset
-dataset_path = "C:\\PATH\\TO\\REPO\\SmartClass-A.I.ssistant\\Dataset"
+dataset_path = ".\\Dataset"
 
 # Define the classes
 classes = ['Angry', 'Neutral', 'Focused', 'Happy']
 
 # Create a directory to save the plots
-plots_dir = "C:\\PATH\\TO\\REPO\\SmartClass-A.I.ssistant\\Dataset\\Plots"
+plots_dir = ".\\Dataset\\Plots"
 if not os.path.exists(plots_dir):
     os.makedirs(plots_dir)
+
 
 # Function to load images from a directory
 def load_images_from_folder(folder):
@@ -30,6 +31,7 @@ def load_images_from_folder(folder):
         if img is not None:
             images.append(img)
     return images
+
 
 # Function to plot class distribution and save the plot
 def plot_class_distribution(class_counts):
@@ -41,6 +43,7 @@ def plot_class_distribution(class_counts):
     plt.savefig(os.path.join(plots_dir, 'class_distribution.png'))
     plt.show()
     plt.close()
+
 
 # Function to plot pixel intensity distribution for all classes in a 2x2 layout and save the plot
 def plot_pixel_intensity_distribution(images_by_class, class_names):
@@ -59,6 +62,7 @@ def plot_pixel_intensity_distribution(images_by_class, class_names):
     plt.savefig(os.path.join(plots_dir, 'pixel_intensity_distribution_all_classes.png'))
     plt.show()
     plt.close()
+
 
 # Function to display and save sample images with histograms
 def display_sample_images_with_histograms(images, class_name):
@@ -92,6 +96,7 @@ def display_sample_images_with_histograms(images, class_name):
     plt.show()
     plt.close()
 
+
 # Main function to visualize dataset and save plots
 def visualize_dataset(dataset_path, classes):
     class_counts = {}
@@ -106,5 +111,6 @@ def visualize_dataset(dataset_path, classes):
 
     plot_pixel_intensity_distribution(images_by_class, classes)
     plot_class_distribution(class_counts)
+
 
 visualize_dataset(dataset_path, classes)

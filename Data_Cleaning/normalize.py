@@ -1,8 +1,8 @@
-'''
+"""
 sources used:
 https://www.geeksforgeeks.org/normalize-an-image-in-opencv-python/
 https://neptune.ai/blog/image-processing-python-libraries-for-machine-learning
-'''
+"""
 
 import os
 import cv2
@@ -38,7 +38,7 @@ def normalize_images(input_folder, output_folder):
         cv2.imwrite(output_path, norm_img)
         print(f"Normalized and saved: {output_path}")
 
-input_folder = 'C:\\PATH\\TO\\REPO\\SmartClass-A.I.ssistant\\Dataset\\Team\\Team_Cropped'
-output_folder = 'C:\\PATH\\TO\\REPO\\SmartClass-A.I.ssistant\\Dataset\\Team\\Team_Normalize'
+input_folder = '.\\Dataset\\Team\\Team_Cropped'
+output_folder = '.\\Dataset\\Team\\Team_Normalize'
 
 normalize_images(input_folder, output_folder)
