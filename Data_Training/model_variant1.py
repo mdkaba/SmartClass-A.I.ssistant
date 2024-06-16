@@ -18,7 +18,7 @@ class MultiLayerFCNetVariant1(nn.Module):
         self.B2 = nn.BatchNorm2d(64)
         self.P2 = nn.PReLU()
         self.Maxpool1 = nn.MaxPool2d(2)
-        self.layer3 = nn.Conv2d(64, 128, 3, padding=1, stride=2)  # Stride 2 instead of maxpooling
+        self.layer3 = nn.Conv2d(64, 128, 3, padding=1, stride=2)  # Stride 2 instead of a maxpool
         self.B3 = nn.BatchNorm2d(128)
         self.P3 = nn.PReLU()
         self.layer4 = nn.Conv2d(128, 128, 3, padding=1, stride=1)
