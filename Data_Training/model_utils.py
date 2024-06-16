@@ -2,7 +2,7 @@
 sources used:
 Lab Exercise #05: Artificial Neural Networks
 Lab Exercise #07: Convolutional Neural Networks (CNNs)
-sklearn.metrics, https://scikit-learn.org/stable/api/sklearn.metrics.html
+Sklearn.metrics, https://scikit-learn.org/stable/api/sklearn.metrics.html
 """
 
 import torch
