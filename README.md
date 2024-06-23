@@ -90,7 +90,7 @@ The primary objective of the SmartClass A.I.ssistant project is to develop a Con
     python Data_Training/data_train.py
     ```
     You will be prompted to choose the model to train (`main`, `variant1`, or `variant2`).<br>
-<strong>* Note </strong>: The Models inside this repo is already trained and can be found in the ```saved_models``` folder. Please follow the next step instead.<br><br>
+<strong>* Note </strong>: The Models inside this repo are already trained and can be found in the ```saved_models``` folder. Please follow the next step instead.<br><br>
 3. Evaluate the models:
     ```bash
     python Data_Training/run_model.py
