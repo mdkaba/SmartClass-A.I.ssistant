@@ -41,6 +41,6 @@ def find_and_handle_duplicates(image_folder, duplicates_folder):
         print("No duplicates found.")
 
 
-image_folder = r'C:PATH\\TO\\FANE\\Happy'
-duplicates_folder = r'C:PATH\\TO\\FANE\\Happy_duplicates'
+image_folder = r"C:\Users\mamad\OneDrive\Documents\Summer 24\COMP 472\SmartClass-A.I.ssistant\Dataset\Bias Dataset\Male Dataset 2.0\Focused"
+duplicates_folder = r"C:\Users\mamad\OneDrive\Documents\Summer 24\COMP 472\SmartClass-A.I.ssistant\Dataset\Bias Dataset\Male Dataset 2.0\fFocused_duplicates"
 find_and_handle_duplicates(image_folder, duplicates_folder)
