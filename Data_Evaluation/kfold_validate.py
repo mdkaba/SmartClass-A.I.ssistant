@@ -16,8 +16,8 @@ import numpy as np
 import pandas as pd
 from torch import nn, optim
 
-from data_training.dataset_utils import FacialExpressionDataset, load_dataset
-from data_training.main_model import MultiLayerFCNet
+from Data_Training.dataset_utils import FacialExpressionDataset, load_dataset
+from Data_Training.main_model import MultiLayerFCNet
 
 
 def train_model(train_loader, val_loader, class_weights, device):
