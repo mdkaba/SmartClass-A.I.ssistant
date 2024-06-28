@@ -15,13 +15,16 @@ from sklearn.model_selection import train_test_split
 from torch import optim, nn
 from torch.utils.data import DataLoader
 import json
+import argparse
+import numpy as np
+from sklearn.utils.class_weight import compute_class_weight
 
 from dataset_utils import FacialExpressionDataset, load_dataset
 from model_utils import evaluate_model
 
 
 def get_model_choice():
-    print("Choose the model to train: main, variant1, or variant2")
+    print("Choose the model to train: main, variant1, variant2, definitive")
     model_choice = input("Enter your choice: ").strip()
     return model_choice
 
@@ -29,16 +32,18 @@ def get_model_choice():
 def select_model(model_choice):
     if model_choice == 'main':
         from main_model import MultiLayerFCNet
-        model = MultiLayerFCNet()
+        return MultiLayerFCNet()
     elif model_choice == 'variant1':
         from model_variant1 import MultiLayerFCNetVariant1
-        model = MultiLayerFCNetVariant1()
+        return MultiLayerFCNetVariant1()
     elif model_choice == 'variant2':
         from model_variant2 import MultiLayerFCNetVariant2
-        model = MultiLayerFCNetVariant2()
+        return MultiLayerFCNetVariant2()
+    elif model_choice == 'definitive':
+        from main_model import MultiLayerFCNet
+        return MultiLayerFCNet()
     else:
-        raise ValueError("Invalid model choice. Choose from 'main', 'variant1', or 'variant2'.")
-    return model
+        raise ValueError("Invalid model choice. Choose from 'main', 'variant1', 'variant2', 'definitive'.")
 
 
 def train_model(model_choice):
@@ -48,7 +53,11 @@ def train_model(model_choice):
         transforms.ToTensor(),
     ])
 
-    root_dir = '.\\Dataset'
+    if model_choice == 'definitive':
+        root_dir = 'C:\\Users\\mamad\\OneDrive\\Documents\\Summer 24\\COMP 472\\SmartClass-A.I.ssistant\\Dataset\\Definitive Dataset'
+    else:
+        root_dir = 'C:\\Users\\mamad\\OneDrive\\Documents\\Summer 24\\COMP 472\\SmartClass-A.I.ssistant\\Dataset\\Original Dataset'
+
     image_paths, labels, class_names = load_dataset(root_dir)
 
     train_paths, temp_paths, train_labels, temp_labels = train_test_split(image_paths, labels, test_size=0.3,
@@ -60,13 +69,18 @@ def train_model(model_choice):
     val_dataset = FacialExpressionDataset(val_paths, val_labels, transform=transform)
     test_dataset = FacialExpressionDataset(test_paths, test_labels, transform=transform)
 
-    train_loader = DataLoader(train_dataset, batch_size=128, shuffle=True, num_workers=4)
-    val_loader = DataLoader(val_dataset, batch_size=128, shuffle=False, num_workers=4)
-    test_loader = DataLoader(test_dataset, batch_size=128, shuffle=False, num_workers=4)
+    train_loader = DataLoader(train_dataset, batch_size=64, shuffle=True, num_workers=4)
+    val_loader = DataLoader(val_dataset, batch_size=64, shuffle=False, num_workers=4)
+    test_loader = DataLoader(test_dataset, batch_size=64, shuffle=False, num_workers=4)
 
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+    model = select_model(model_choice)
     model.to(device)
-    criterion = nn.CrossEntropyLoss()
+
+    class_weights = compute_class_weight('balanced', classes=np.unique(train_labels), y=train_labels)
+    class_weights = torch.tensor(class_weights, dtype=torch.float).to(device)
+
+    criterion = nn.CrossEntropyLoss(weight=class_weights)
     optimizer = optim.Adam(model.parameters(), lr=0.001, weight_decay=1e-4)
     num_epochs = 60
     best_val_loss = float('inf')
@@ -74,7 +88,6 @@ def train_model(model_choice):
     epochs_no_improve = 0
     best_epoch = -1
     best_metrics = None
-    class_names = ['Angry', 'Neutral', 'Focused', 'Happy']
 
     model_dir = os.path.join(os.getcwd(), 'saved_models')
     os.makedirs(model_dir, exist_ok=True)
@@ -108,7 +121,7 @@ def train_model(model_choice):
             train_pred.extend(predicted.cpu().numpy())
 
         train_acc = 100 * train_correct / train_total
-        train_f1 = f1_score(train_true, train_pred, average='weighted')
+        train_f1 = f1_score(train_true, train_pred, average='weighted', zero_division=0)
         avg_train_loss = running_loss / len(train_loader)
 
         print(
@@ -137,7 +150,7 @@ def train_model(model_choice):
                 val_pred.extend(predicted.cpu().numpy())
 
         val_acc = 100 * val_correct / val_total
-        val_f1 = f1_score(val_true, val_pred, average='weighted')
+        val_f1 = f1_score(val_true, val_pred, average='weighted', zero_division=0)
         avg_val_loss = val_loss / len(val_loader)
 
         print(
@@ -176,6 +189,13 @@ def train_model(model_choice):
 
 
 if __name__ == '__main__':
-    model_choice = get_model_choice()
-    model = select_model(model_choice)
-    train_model(model_choice)
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--model', type=str, help='Choose the model to train: main, variant1, variant2, definitive')
+    args = parser.parse_args()
+
+    if not args.model:
+        args.model = get_model_choice()
+
+    train_model(args.model)
+
+
