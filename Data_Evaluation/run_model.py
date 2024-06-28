@@ -113,21 +113,21 @@ def main():
 
         if args.mode == 'dataset':
             if args.model == 'main_male':
-                root_dir = 'Dataset/Bias Dataset/Male Dataset'
+                root_dir = 'Dataset/Bias Datasets/Male Dataset'
             elif args.model == 'main_male2.0':
-                root_dir = 'Dataset/Bias Dataset/Male Dataset 2.0'
+                root_dir = 'Dataset/Bias Datasets/Male Dataset 2.0'
             elif args.model == 'main_female':
-                root_dir = 'Dataset/Bias Dataset/Female Dataset'
+                root_dir = 'Dataset/Bias Datasets/Female Dataset'
             elif args.model == 'main_asian':
-                root_dir = 'Dataset/Bias Dataset/Asian Dataset'
+                root_dir = 'Dataset/Bias Datasets/Asian Dataset'
             elif args.model == 'main_asian2.0':
-                root_dir = 'Dataset/Bias Dataset/Asian Dataset 2.0'
+                root_dir = 'Dataset/Bias Datasets/Asian Dataset 2.0'
             elif args.model == 'main_black':
-                root_dir = 'Dataset/Bias Dataset/Black Dataset'
+                root_dir = 'Dataset/Bias Datasets/Black Dataset'
             elif args.model == 'main_black2.0':
-                root_dir = 'Dataset/Bias Dataset/Black Dataset 2.0'
+                root_dir = 'Dataset/Bias Datasets/Black Dataset 2.0'
             elif args.model == 'main_white':
-                root_dir = 'Dataset/Bias Dataset/White Dataset'
+                root_dir = 'Dataset/Bias Datasets/White Dataset'
             elif args.model == 'definitive':
                 root_dir = 'Dataset/Definitive Dataset'
             else:
