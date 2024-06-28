@@ -13,11 +13,11 @@ from torch.utils.data import DataLoader
 import json
 import os
 
-from data_training.dataset_utils import FacialExpressionDataset, load_dataset
-from data_training.main_model import MultiLayerFCNet
-from data_training.model_variant1 import MultiLayerFCNetVariant1
-from data_training.model_variant2 import MultiLayerFCNetVariant2
-from data_training.model_utils import evaluate_model
+from Data_Training.dataset_utils import FacialExpressionDataset, load_dataset
+from Data_Training.main_model import MultiLayerFCNet
+from Data_Training.model_variant1 import MultiLayerFCNetVariant1
+from Data_Training.model_variant2 import MultiLayerFCNetVariant2
+from Data_Training.model_utils import evaluate_model
 
 
 def get_user_input():
