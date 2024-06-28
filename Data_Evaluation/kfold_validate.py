@@ -7,14 +7,19 @@ Image Classification with Convolutional Neural Networks, https://www.youtube.com
 Writing Custom Datasets, DataLoaders and Transforms, https://pytorch.org/tutorials/beginner/data_loading_tutorial.html#writing-custom-datasets-dataloaders-and-transforms
 """
 import os
+import sys
 import torch
 import torchvision.transforms as transforms
 from sklearn.model_selection import KFold
+from sklearn.utils import compute_class_weight
 from torch.utils.data import DataLoader, Subset
 from sklearn.metrics import precision_score, recall_score, f1_score, accuracy_score, confusion_matrix
 import numpy as np
 import pandas as pd
 from torch import nn, optim
+
+# Add the parent directory to the system path
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from Data_Training.dataset_utils import FacialExpressionDataset, load_dataset
 from Data_Training.main_model import MultiLayerFCNet
@@ -182,3 +187,6 @@ if __name__ == '__main__':
         kfold_cross_validation(dataset_path)
     else:
         print("Invalid choice. Please choose from 'main_model' or 'definitive_model'.")
+
+
+

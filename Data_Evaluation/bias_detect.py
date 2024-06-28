@@ -8,6 +8,7 @@ Writing Custom Datasets, DataLoaders and Transforms, https://pytorch.org/tutoria
 """
 
 import os
+import sys
 import torch
 import torchvision.transforms as transforms
 from sklearn.metrics import f1_score
@@ -18,9 +19,12 @@ import json
 import numpy as np
 from sklearn.utils.class_weight import compute_class_weight
 
-from data_training.dataset_utils import FacialExpressionDataset, load_dataset
-from data_training.model_utils import evaluate_model
-from data_training.main_model import MultiLayerFCNet  # Only using the main model for bias checking
+# Add the parent directory to the system path
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+from Data_Training.dataset_utils import FacialExpressionDataset, load_dataset
+from Data_Training.model_utils import evaluate_model
+from Data_Training.main_model import MultiLayerFCNet  # Only using the main model for bias checking
 
 def train_model(dataset_path, model_name):
     transform = transforms.Compose([
@@ -157,14 +161,14 @@ def train_model(dataset_path, model_name):
 
 if __name__ == '__main__':
     groups = {
-        'male': '.\\Dataset\\Bias Dataset\\Male Dataset',
-        'male2.0': '.\\Dataset\\Bias Dataset\\Male Dataset 2.0',
-        'female': '.\\Dataset\\Bias Dataset\\Female Dataset',
-        'white': '.\\Dataset\\Bias Dataset\\White Dataset',
-        'black': '.\\Dataset\\Bias Dataset\\Black Dataset',
-        'black2.0': '.\\Dataset\\Bias Dataset\\Black Dataset 2.0',
-        'asian': '.\\Dataset\\Bias Dataset\\Asian Dataset',
-        'asian2.0': '.\\Dataset\\Bias Dataset\\Asian Dataset 2.0'
+        'male': './Dataset/Bias Datasets/Male Dataset',
+        'male2.0': './Dataset/Bias Datasets/Male Dataset 2.0',
+        'female': './Dataset/Bias Datasets/Female Dataset',
+        'white': './Dataset/Bias Datasets/White Dataset',
+        'black': './Dataset/Bias Datasets/Black Dataset',
+        'black2.0': './Dataset/Bias Datasets/Black Dataset 2.0',
+        'asian': './Dataset/Bias Datasets/Asian Dataset',
+        'asian2.0': './Dataset/Bias Datasets/Asian Dataset 2.0'
     }
 
     print("Choose the group to train: male, male2.0, female, white, black, black2.0, asian, or asian2.0")
