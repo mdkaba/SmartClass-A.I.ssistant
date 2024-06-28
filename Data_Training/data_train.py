@@ -54,9 +54,9 @@ def train_model(model_choice):
     ])
 
     if model_choice == 'definitive':
-        root_dir = 'C:\\Users\\mamad\\OneDrive\\Documents\\Summer 24\\COMP 472\\SmartClass-A.I.ssistant\\Dataset\\Definitive Dataset'
+        root_dir = '.\\Dataset\\Definitive Dataset'
     else:
-        root_dir = 'C:\\Users\\mamad\\OneDrive\\Documents\\Summer 24\\COMP 472\\SmartClass-A.I.ssistant\\Dataset\\Original Dataset'
+        root_dir = '.\\Dataset\\Original Dataset'
 
     image_paths, labels, class_names = load_dataset(root_dir)
 
@@ -69,9 +69,9 @@ def train_model(model_choice):
     val_dataset = FacialExpressionDataset(val_paths, val_labels, transform=transform)
     test_dataset = FacialExpressionDataset(test_paths, test_labels, transform=transform)
 
-    train_loader = DataLoader(train_dataset, batch_size=64, shuffle=True, num_workers=4)
-    val_loader = DataLoader(val_dataset, batch_size=64, shuffle=False, num_workers=4)
-    test_loader = DataLoader(test_dataset, batch_size=64, shuffle=False, num_workers=4)
+    train_loader = DataLoader(train_dataset, batch_size=128, shuffle=True, num_workers=4)
+    val_loader = DataLoader(val_dataset, batch_size=128, shuffle=False, num_workers=4)
+    test_loader = DataLoader(test_dataset, batch_size=128, shuffle=False, num_workers=4)
 
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
     model = select_model(model_choice)
