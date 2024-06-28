@@ -3,13 +3,12 @@ sources used:
 https://www.geeksforgeeks.org/normalize-an-image-in-opencv-python/
 https://neptune.ai/blog/image-processing-python-libraries-for-machine-learning
 """
-'''
+
 import os
 import cv2
 
 
 def normalize_images(input_folder, output_folder):
-
     if not os.path.exists(output_folder):
         os.makedirs(output_folder)
 
@@ -38,37 +37,8 @@ def normalize_images(input_folder, output_folder):
         cv2.imwrite(output_path, norm_img)
         print(f"Normalized and saved: {output_path}")
 
+
 input_folder = '.\\Dataset\\Team\\Team_Cropped'
 output_folder = '.\\Dataset\\Team\\Team_Normalize'
 
 normalize_images(input_folder, output_folder)
-'''
-import os
-import cv2
-
-def normalize_images(input_folder):
-    for root, dirs, files in os.walk(input_folder):
-        for file in files:
-            if file.lower().endswith(('.png', '.jpg', '.jpeg')):
-                input_file_path = os.path.join(root, file)
-
-                if os.path.isfile(input_file_path):
-                    img = cv2.imread(input_file_path)
-
-                    if img is not None:
-                        # Normalize the image
-                        norm_img = cv2.normalize(img, None, alpha=0, beta=1, norm_type=cv2.NORM_MINMAX, dtype=cv2.CV_32F)
-
-                        # Convert the normalized image to 8-bit format before saving
-                        norm_img = (255 * norm_img).astype('uint8')
-
-                        # Save the normalized image
-                        cv2.imwrite(input_file_path, norm_img)
-                        print(f"Normalized and saved {file} at {input_file_path}")
-                    else:
-                        print(f"Failed to read {file}")
-
-input_folder = "C:\\Users\\mamad\\OneDrive\\Documents\\Summer 24\\COMP 472\\a"
-
-# Call the function to normalize images
-normalize_images(input_folder)

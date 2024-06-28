@@ -1,5 +1,6 @@
 import os
 
+
 def rename_images_in_folder(folder_path, naming_format):
     class_names = ['Angry', 'Happy', 'Neutral', 'Focused']
 
@@ -22,8 +23,9 @@ def rename_images_in_folder(folder_path, naming_format):
                 os.rename(old_path, new_path)
                 print(f"Renamed: {old_path} -> {new_path}")
 
+
 def rename_race_folders():
-    base_path = "C:\\Users\\mamad\\OneDrive\\Desktop\\Dataset\\Bias Dataset"
+    base_path = ".\\Dataset\\Bias Dataset"
     race_folders = ['Asian Dataset', 'Asian Dataset 2.0', 'Black Dataset', 'Black Dataset 2.0', 'White Dataset']
 
     for folder in race_folders:
@@ -35,8 +37,9 @@ def rename_race_folders():
         elif 'White' in folder:
             rename_images_in_folder(folder_path, "{expression}_White_{number:03d}")
 
+
 def rename_gender_folders():
-    base_path = "C:\\Users\\mamad\\OneDrive\\Desktop\\Dataset\\Bias Dataset"
+    base_path = ".Dataset\\Bias Dataset"
     gender_folders = ['Female Dataset', 'Male Dataset', 'Male Dataset 2.0']
 
     for folder in gender_folders:
@@ -45,6 +48,7 @@ def rename_gender_folders():
             rename_images_in_folder(folder_path, "{expression}_Female_{number:03d}")
         elif 'Male' in folder:
             rename_images_in_folder(folder_path, "{expression}_Male_{number:03d}")
+
 
 if __name__ == "__main__":
     rename_race_folders()

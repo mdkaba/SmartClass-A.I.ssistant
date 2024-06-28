@@ -4,7 +4,7 @@ import imagehash
 from PIL import Image
 
 # Define paths
-root_dir = "C:\\Users\\mamad\\OneDrive\\Desktop\\Dataset\\Bias Dataset"
+root_dir = ".Dataset\\Bias Dataset"
 definitive_dataset = os.path.join(root_dir, 'Definitive Dataset')
 
 # Define the attributes mapping for each dataset
@@ -27,10 +27,12 @@ class_mapping = {
     'Neutral': 'Neutral'
 }
 
+
 # Function to hash image content using perceptual hashing
 def perceptual_hash(image_path):
     with Image.open(image_path) as img:
         return imagehash.phash(img)
+
 
 # Function to rename and copy images for gender
 def rename_and_copy_gender_images(dataset_name, attribute):
@@ -42,11 +44,12 @@ def rename_and_copy_gender_images(dataset_name, attribute):
         images = os.listdir(class_path)
         for i, image_name in enumerate(images):
             src_path = os.path.join(class_path, image_name)
-            new_image_name = f"{class_name}_{attribute}_{i+1:03d}.jpg"
+            new_image_name = f"{class_name}_{attribute}_{i + 1:03d}.jpg"
             dest_dir = os.path.join(definitive_dataset, class_folder)
             os.makedirs(dest_dir, exist_ok=True)
             dest_path = os.path.join(dest_dir, new_image_name)
             shutil.copy(src_path, dest_path)
+
 
 # Function to rename and copy images for race
 def rename_and_copy_race_images(dataset_name, attribute):
@@ -58,11 +61,12 @@ def rename_and_copy_race_images(dataset_name, attribute):
         images = os.listdir(class_path)
         for i, image_name in enumerate(images):
             src_path = os.path.join(class_path, image_name)
-            new_image_name = f"{class_name}_{attribute}_{i+1:03d}.jpg"
+            new_image_name = f"{class_name}_{attribute}_{i + 1:03d}.jpg"
             dest_dir = os.path.join(definitive_dataset, class_folder)
             os.makedirs(dest_dir, exist_ok=True)
             dest_path = os.path.join(dest_dir, new_image_name)
             shutil.copy(src_path, dest_path)
+
 
 # Rename and copy gender images
 for dataset_name, attribute in gender_attributes.items():
@@ -71,6 +75,7 @@ for dataset_name, attribute in gender_attributes.items():
 # Rename and copy race images
 for dataset_name, attribute in race_attributes.items():
     rename_and_copy_race_images(dataset_name, attribute)
+
 
 # Combine duplicates with combined names using perceptual hashing
 def combine_duplicates():
@@ -88,7 +93,8 @@ def combine_duplicates():
                 existing_parts = existing_name.split('_')[:-1]
                 new_parts = image_name.split('_')[:-1]
                 combined_parts = sorted(set(existing_parts + new_parts))
-                combined_parts = [combined_parts[0]] + sorted(combined_parts[1:], key=lambda x: ('White' not in x, 'Black' not in x, 'Asian' not in x, 'Female' not in x, 'Male' not in x))
+                combined_parts = [combined_parts[0]] + sorted(combined_parts[1:], key=lambda x: (
+                'White' not in x, 'Black' not in x, 'Asian' not in x, 'Female' not in x, 'Male' not in x))
                 combined_name = f"{class_name}_{'_'.join(combined_parts)}_{len(os.listdir(class_path)):03d}.jpg"
                 combined_name = combined_name.replace(f"{class_name}_", "").replace(f"{class_name}_", "")
                 combined_name = f"{class_name}_{combined_name}"
@@ -106,9 +112,11 @@ def combine_duplicates():
         for i, image_name in enumerate(os.listdir(class_path)):
             src_path = os.path.join(class_path, image_name)
             parts = image_name.split('_')
-            unique_parts = sorted(set(parts[1:-1]), key=lambda x: ('White' not in x, 'Black' not in x, 'Asian' not in x, 'Female' not in x, 'Male' not in x))
-            final_name = f"{class_name}_{'_'.join(unique_parts)}_{i+1:03d}.jpg"
+            unique_parts = sorted(set(parts[1:-1]), key=lambda x: (
+            'White' not in x, 'Black' not in x, 'Asian' not in x, 'Female' not in x, 'Male' not in x))
+            final_name = f"{class_name}_{'_'.join(unique_parts)}_{i + 1:03d}.jpg"
             final_path = os.path.join(class_path, final_name)
             os.rename(src_path, final_path)
+
 
 combine_duplicates()
