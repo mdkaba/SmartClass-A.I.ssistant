@@ -30,16 +30,16 @@ def evaluate_model(model, data_loader, device, class_names):
             test_pred.extend(predicted.cpu().numpy())
 
     test_acc = 100 * test_correct / test_total
-    test_f1_weighted = f1_score(test_true, test_pred, average='weighted')
+    test_f1_weighted = f1_score(test_true, test_pred, average='weighted', zero_division=0)
 
     # Calculate macro and micro averaged precision, recall, and F1-score
-    precision_macro = precision_score(test_true, test_pred, average='macro')
-    recall_macro = recall_score(test_true, test_pred, average='macro')
-    f1_macro = f1_score(test_true, test_pred, average='macro')
+    precision_macro = precision_score(test_true, test_pred, average='macro', zero_division=0)
+    recall_macro = recall_score(test_true, test_pred, average='macro', zero_division=0)
+    f1_macro = f1_score(test_true, test_pred, average='macro', zero_division=0)
 
-    precision_micro = precision_score(test_true, test_pred, average='micro')
-    recall_micro = recall_score(test_true, test_pred, average='micro')
-    f1_micro = f1_score(test_true, test_pred, average='micro')
+    precision_micro = precision_score(test_true, test_pred, average='micro', zero_division=0)
+    recall_micro = recall_score(test_true, test_pred, average='micro', zero_division=0)
+    f1_micro = f1_score(test_true, test_pred, average='micro', zero_division=0)
 
     print(f"Accuracy: {test_acc:.2f}%")
     print(f"Weighted F1-Score: {test_f1_weighted:.4f}")
@@ -63,3 +63,4 @@ def evaluate_model(model, data_loader, device, class_names):
         "recall_micro": recall_micro,
         "f1_micro": f1_micro
     }
+
